@@ -1,53 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Mongo Scraper</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home
-                <span class="sr-only">(current)</span>
-            </a>
-            <a class="nav-item nav-link" href="/saved">Saved Articles</a>
-            <a href="/scrape" class="btn btn-danger active" role="button" aria-pressed="true">Scrape NYT</a>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid">
-        <div class="jumbotron text-center background-image">
-            <div class="overlay">
-                <div class="caption">
-                    <h1 class="display-1 text-white">Mongo Scraper</h1>
-                    <h2 class="text-white">NYT Edition</h2>
-                </div>
-            </div>
-        </div>
-    <div class=row>
-        <div class="col-12">
-            {{#if articles}}
-            {{#each articles}}
-                <div class="card w-90">
-                    <div class="card-header text-white bg-primary">
-                        <a href={{link}} target="_blank" class="text-white">
-                            <h2>{{title}}</h2>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            {{summary}}
-                        </p>
-                        <button id="{{_id}}" class="btn btn-primary save-btn">Save Article</button>
-                    </div>
-                </div>
-            {{/each}}
-            {{else}}
-                <div class="card text-white bg-warning w-90 p-1">
-                    <div class="card-body text-center">
-                        Uh oh. Looks like we don't have any new articles
-                    </div>
-                </div>
-            {{/if}}
-        </div>
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <p id="brand" class="pure-menu-heading"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Newscraper</p>
+
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item pure-menu-selected"><a id="saved-articles-link" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item"><a id="saved-articles-link" href="/saved" class="pure-menu-link">Saved Articles</a></li>
+        </ul>
     </div>
 </div>
+
+<div class="splash-container">
+    <div class="splash">
+        <h1 class="splash-head">Newscraper</h1>
+        <p class="splash-subhead">
+            Scrape the New York Times Business Day
+        </p>
+        <p><a id="scrape-button" class="pure-button pure-button-primary">Scrape Articles</a></p>
+    </div>
+</div>
+
+{{!-- scrolling content wrapper --}}
+<div class="content-wrapper">
+    <div class="content">
+        <h1 id="articles-header">There are no unsaved articles to display</h1>
+
+        {{!-- pure grid --}}
+        <div id="articles-container" class="pure-g">
+
+            {{!-- dynamically created articles go here --}}
+        </div>
+
+    </div>
+</div>
+
+{{!-- results modal - displays number of articles scraped --}}
+<div id="results-modal" class="modal fade modal-dialog modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h1 id="myModalLabel">Scraping Complete</h1>
+    </div>
+
+    <div class="modal-body">
+        <h2 id="scrape-message"><span id="num-scrapes"></span> new articles</h2>
+    </div>
+
+    <div class="modal-footer">
+        <button class="pure-button" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+<script src="assets/js/app.js"></script>

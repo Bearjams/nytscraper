@@ -9,37 +9,24 @@ var ArticleSchema = new Schema({
     required: true,
     unique: true
   },
-
+  // link is a required string
   link: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
-
   summary: {
     type: String,
-    required: false,
-    unique: false
+    required: true
   },
-
-  byline: {
-    type: String,
-    required: false,
-    unique: false
-  },
-
   isSaved: {
     type: Boolean,
-    default: false,
-    required: false,
-    unique: false
+    default: false
   },
-  // `note` is an object that stores a Note id
-  // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
-  note: {
-    type: [{ type: Schema.Types.ObjectId, ref: 'Note'}],
-  }
+  // This only saves one note's ObjectId, ref refers to the Note model
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: "Note"
+  }]
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
